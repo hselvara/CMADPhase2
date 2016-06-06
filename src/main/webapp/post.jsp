@@ -1,4 +1,5 @@
 <div ng-controller="postview as postview">
+<img src="iask.png" alt="iAsk.com ">
 <table>
 <tr>
 <td class="ask-title-cell-key">

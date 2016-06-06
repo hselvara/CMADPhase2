@@ -29,3 +29,4 @@
 </tr>
 </table>
 <input name="regbutton" id="postqu" type="button" class="button" value="Post Your Answer" />
+<input name="cancelbutton" id="cancelqu" type="button" class="button" value="Cancel" ng-click="cancelQuestion()"  />

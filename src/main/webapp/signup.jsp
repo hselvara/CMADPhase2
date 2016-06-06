@@ -1,5 +1,6 @@
 <div ng-controller="SignupController as SignupController">
 	<h1>iAsk Registration</h1>
+	<img src="iask.png" alt="iAsk.com ">
 	<form action="" method="post" id="customtheme">
 		<p>
 			<label for="first name">First Name</label> <input type="text"

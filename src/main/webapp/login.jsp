@@ -1,4 +1,5 @@
 <div ng-controller ="logincontroller as logincontroller" id="login-form">
+<img src="iask.png" alt="iAsk.com ">
 <h1>iAsk login</h1>
     <form action="" method="post" name="signup/login" class="register">
         <fieldset>

@@ -17,6 +17,9 @@
 				}).when('/post', {
 					templateUrl : 'post.jsp',
 					controller : 'postview'
+				}).when('/logout', {
+					templateUrl : 'logout.jsp',
+					controller : 'logout'
 				}).when('/:myitemid', {
 					templateUrl : 'displayQuestion.jsp',
 					controller : 'displayQuestion'
@@ -26,14 +29,19 @@
 			} ]);
 	app.filter('startFrom', function() {
 		return function(input, start) {
-			start = +start;
+			if (!input || !input.length) { return; }
+//			start = +start;
 			return input.slice(start);
 		}
+		
 	});
-	app.controller("displayview", function($http, $scope, $log) {
+	
+	
+	app.controller("displayview", function($http, $scope, $log,$rootScope) {
 		var controller = this;
 		$scope.questions = {};
 		$scope.loading = true;
+		$scope.name=$rootScope.myusername;
 		$log.debug("Getting users...");
 		//http://www.w3schools.com/angular/customers.php
 		$http.get("rest/question/all").then(
@@ -46,13 +54,18 @@
 		$scope.currentPage = 0;
 		$scope.pageSize = 5;
 		$scope.numberOfPages = function() {
+			if ($scope.information.length){
 			return Math.ceil($scope.information.length
 					/ $scope.pageSize);
+			}
 		}
 	});
+	
 	//GET Question by ID
 	app.controller("displayQuestion",function($http, $scope, $routeParams, $location, $rootScope,$route,$log){
-		
+		$scope.cancelQuestion = function() {
+			$location.url('/');
+		}
 		 $http.get("rest/question/id/"+$routeParams.myitemid).then(function successCallBack(response, status, headers, config) {
 				console.log(response);
 				$scope.getresponse = response.data;
@@ -67,7 +80,12 @@
 
 	});
 
-	
+	//Logout functionality
+	app.controller("logout",function($http, $scope, $routeParams, $location, $rootScope,$route){
+		if ($rootScope.myusername){
+			$rootScope.myusername=null;
+		}
+	});
 
 	// POST functionality
 	app.controller("postview", function($http, $scope, $log, $location, $rootScope) {
@@ -77,6 +95,7 @@
 						}
 						
 						$scope.postQuestion = function() {
+							if ($rootScope.myusername){
 							$http.defaults.headers.common['Authorization'] = $rootScope.authHeader;
 							var jsondata={
 									title:$scope.QuestnAns.Title,
@@ -97,6 +116,11 @@
 													alert("There is problem in creating the question. Kindly report");
 												}
 						});
+						}	
+						else {
+							alert("You have not logged in. You must log in to post a question!!!");
+							
+						} 
 						}
 	});
 
