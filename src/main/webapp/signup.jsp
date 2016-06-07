@@ -1,35 +1,18 @@
 <div ng-controller="SignupController as SignupController">
-	<h1>iAsk Registration</h1>
+	<h1>iAsk Signup</h1>
 	<img src="iask.png" alt="iAsk.com ">
-	<form action="" method="post" id="customtheme">
-		<p>
-			<label for="first name">First Name</label> <input type="text"
-				name="firstname" id="firstname" ng-model="user.firstname" />
-		</p>
-		<p>
-			<label for="last name">Last Name</label> <input type="text"
-				name="lastname" id="lastname" ng-model="user.lastname" />
-		</p>
+	    <form action="" method="post" name="signup/login" class="register">
+        <fieldset>
+            <div class="login-form">
+                <b>First Name: </b><input name="username" id="username" ng-model="user.firstname" /></br>
+                <b>Last Name : </b><input name="username" id="username" ng-model="user.lastname" /></br>
+                <b>User Name : </b><input name="username" id="username" ng-model="user.name" /></br>
+                <b>Password  :  </b><input name="password" type="password" id="password" ng-model="user.password" /></br>
+                <b>Email ID  :    </b><input name="username" id="username" ng-model="user.email" /></br>
+            </div>
+			<input name="submit" type="button" id="post-btn" class="button" value="Signup" ng-click="postSignup()" />
+			<input name="cancel" type="button" id="cancel-btn" class="button" value="cancel" ng-click="cancelSignup()" />
 
-		<p>
-			<label for="name">Name</label> <input type="text"
-				name="name" id="name" ng-model="user.name" />
-		</p>
-
-		<p>
-			<label for="password">Password</label>
-			 <input name="password" id="password" type="password" ng-model="user.password" />
-		</p>
-
-		<p>
-			<label for="email">Email</label> <input type="text" name="email"
-				id="email" ng-model="user.email" />
-		</p>
-
-		<p>
-			<input type="button" name="submit" value="Submit" id="submitbutton"
-				ng-click="postSignup()" /> 
-			<input type="button" name="cancel" value="Cancel" id="cancelbutton" ng-click="cancelSignup()" />
-		</p>
-	</form>
+        </fieldset>
+    </form>
 </div>

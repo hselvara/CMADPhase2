@@ -52,7 +52,7 @@
 					$scope.error = status;
 				});
 		$scope.currentPage = 0;
-		$scope.pageSize = 5;
+		$scope.pageSize = 4;
 		$scope.numberOfPages = function() {
 			if ($scope.information.length){
 			return Math.ceil($scope.information.length
@@ -95,7 +95,6 @@
 						}
 						
 						$scope.postQuestion = function() {
-							if ($rootScope.myusername){
 							$http.defaults.headers.common['Authorization'] = $rootScope.authHeader;
 							var jsondata={
 									title:$scope.QuestnAns.Title,
@@ -105,23 +104,25 @@
 									
 							};
 							console.log(jsondata);
-							var res=$http.post("rest/question/create",jsondata);
-							res.success(function(response,status, headers) {
-												console.log(response);
-												console.log("Question succesfully posted ");
+							$http.post("rest/question/create",jsondata)
+							.success(function(data,status, headers) {
+								if(data.status == true){			
+									console.log("my data: "+data);
+									console.log("my status: "+status);
+									console.log("my headers: "+headers);
+									alert("Question succesfully posted ");
 												$location.url('/');
-											});
-							res.error(function(data,status, headers, config) {
-												if (parseInt(data.status) != 200) {
-													alert("There is problem in creating the question. Kindly report");
-												}
+											}
+								
+								
+						}).error(function(data,status,headers){
+							if(status != 200){			
+									console.log(data);
+									alert("There is problem in creating the question. Kindly report");
+												$location.url('/');
+											}
 						});
 						}	
-						else {
-							alert("You have not logged in. You must log in to post a question!!!");
-							
-						} 
-						}
 	});
 
 	// Signup functionality
@@ -162,7 +163,6 @@
 									+ btoa($scope.user.name + ":"
 											+ ($scope.user.password));
 							console.log($rootScope.authHeader);
-							$rootScope.myusername=$scope.user.name;
 							$http.defaults.headers.common['Authorization'] = $rootScope.authHeader;
 							$http.get("rest/auth/login/" + $scope.user.name,$scope.user)
 									.then(
@@ -178,9 +178,13 @@
 											},
 											function errorCallback(data,
 													status, headers, config) {
-												if (parseInt(data.status) != 200) {
+												if (parseInt(status) == 401) {
 													alert("The user credentials are not valid, Kindly check your username and password.")
 												}
+												if (parseInt(status) == 500) {
+													alert("Internal Server error occured. Kindly check your DB connection.")
+												}
+
 
 											});
 						}

@@ -1,4 +1,4 @@
-<div ng-controller="displayview as displayview">
+<div ng-controller="displayview as displayview"  class="col-sm-7">
 	<div id="myimg" style='text-align: left;'>
 		<img src="iask.png">
 	</div>
@@ -21,12 +21,21 @@
 		<button ng-hide="name">
 			<a href="#/signup">Signup</a>
 		</button>
-
-		
 	</div>
 	</div>
-	<div id="greet" ng-model="myusername">
-		<div ng-show="myusername">Welcome {{myusername}}</div>
+	<br></br>
+	<div style='float: right;' id="greet" ng-model="myusername">
+		<div ng-show="myusername">Welcome <b>{{myusername}} </b></div>
+	</div>
+	<div>
+	<table border: 16px ridge(5,10,1)>
+	<tr>
+	<td>
+	<strong>iask.com</strong> is a community of bloggers just like you and me by helping each other.<br></br>
+	Join us it only takes few minutes.
+	</td>
+	</tr>
+	</table>
 	</div>
 
 	<div class="container-1" id="placeholder">
@@ -47,17 +56,16 @@
 				ng-click="currentPage=currentPage+1">Next</button>
 		</div>
 
-		<div id="tab-container"></div>
 		<div id="main-container">
-			<table border=2 style='width: 100%'>
-				<tr
+			<table  style='width: 100%;align:center;border:1px;border-top-style: solid;'>
+				<tr 
 					ng-repeat="item in information |startFrom:currentPage*pageSize | limitTo:pageSize| filter:mysearch">
 					<!-- 					 | filter:mysearch" -->
 
-					<td>
+					<td style='border:1px ;border-bottom-style: solid; '>
 						<ul>
 							Title:
-							<a href="#/{{item.id}}">{{item.title}}</a>
+							<a href="#/{{item.id}}"><b>{{item.title}}</b></a>
 						</ul>
 						<ul>Description:{{item.description}}
 						</ul>
