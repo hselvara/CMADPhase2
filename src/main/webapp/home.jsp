@@ -57,21 +57,16 @@
 		</div>
 
 		<div id="main-container">
-			<table  style='width: 100%;align:center;border:1px;border-top-style: solid;'>
+			<table  style='width: 100%;align:centre;border:1px;border-top-style: solid;'>
 				<tr 
 					ng-repeat="item in information |startFrom:currentPage*pageSize | limitTo:pageSize| filter:mysearch">
 					<!-- 					 | filter:mysearch" -->
 
-					<td style='border:1px ;border-bottom-style: solid; '>
+					<td style='border:1px ;border-bottom-style: solid;align:center '>
 						<ul>
-							Title:
-							<a href="#/{{item.id}}"><b>{{item.title}}</b></a>
+							<h2><a href="#/{{item.id}}"><b>{{item.title}}</b></a><br></h2>
 						</ul>
-						<ul>Description:{{item.description}}
-						</ul>
-						<ul>UserName: {{item.username}}
-						</ul>
-						<ul>No of Answers:{{item.answers}}
+						<ul>{{item.description | limitTo: 20 }}{{item.description.length > 20 ? '...' : ''}}
 						</ul>
 					</td>
 				</tr>
