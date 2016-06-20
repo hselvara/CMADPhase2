@@ -8,7 +8,7 @@
                 <b>Password:</b><input name="password" type="password" id="password" ng-model="user.password" />
             </div>
 			<input name="login" type="button" id="post-btn" class="button" value="login" ng-click="loginUser()" />
-			<input name="cancel" type="button" id="cancel-btn" class="button" value="cancel" ng-click="cancelUser()" />
+<!-- 			<input name="cancel" type="button" id="cancel-btn" class="button" value="cancel" ng-click="cancelUser()" /> -->
 
         </fieldset>
     </form>
